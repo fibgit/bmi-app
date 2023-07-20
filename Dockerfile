@@ -5,14 +5,10 @@ FROM python:3.9-slim
 WORKDIR /app
 
 # Install the required system packages for Tkinter (Debian/Ubuntu-based)
-RUN apt-get update \
-    && apt-get install -y --no-install-recommends \
-        libgl1 \
-        libgtk-3-0 \
-    && rm -rf /var/lib/apt/lists/*
+RUN apt-get update && apt-get install -y libx11-6 libxext-dev libxrender-dev libxinerama-dev libxi-dev libxrandr-dev libxcursor-dev libxtst-dev tk-dev && rm -rf /var/lib/apt/list/*
 
 # Copy the application files to the container
-COPY main.py /app
+COPY . .
 
 # Set the command to run the application
 CMD ["python", "main.py"]
